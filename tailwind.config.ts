@@ -7,13 +7,24 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
+      fontFamily: {
+        kanit: ['Kanit', 'sans-serif'],
+      },
       colors: {
+        "neon-pink": "hsl(var(--neon-pink))",
+        "neon-cyan": "hsl(var(--neon-cyan))",
+        "neon-purple": "hsl(var(--neon-purple))",
+        "neon-yellow": "hsl(var(--neon-yellow))",
+        "neon-green": "hsl(var(--neon-green))",
+        "card-red": "hsl(var(--card-red))",
+        "card-black": "hsl(var(--card-black))",
+        "card-face": "hsl(var(--card-face))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -65,20 +76,12 @@ export default {
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
         },
       },
       animation: {
