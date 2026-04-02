@@ -103,12 +103,6 @@ const Index = () => {
           เริ่มเกมใหม่
         </Button>
         <RulesModal rules={rules} onSave={setRules} />
-        <Link to="/dice">
-          <Button variant="outline" className="gap-2 border-neon-yellow/40 hover:border-neon-yellow hover:bg-neon-yellow/10 transition-colors">
-            <Dices className="w-4 h-4" />
-            ลูกเต๋า
-          </Button>
-        </Link>
       </div>
     </div>
   );
