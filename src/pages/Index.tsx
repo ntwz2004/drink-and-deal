@@ -1,10 +1,11 @@
 import { useState, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import PlayingCard from '@/components/PlayingCard';
 import CardDeck from '@/components/CardDeck';
 import RulesModal from '@/components/RulesModal';
 import { createDeck, DEFAULT_RULES, SPECIAL_RANKS, type PlayingCard as CardType, type Rank } from '@/lib/gameData';
-import { RotateCcw } from 'lucide-react';
+import { RotateCcw, Dices } from 'lucide-react';
 
 const TOTAL = 52;
 
