@@ -65,7 +65,7 @@ const DiceGame = () => {
       <Link to="/" className="self-start mb-4">
         <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-foreground">
           <ArrowLeft className="w-4 h-4" />
-          ไพ่ปาร์ตี้
+          กลับหน้าหลัก
         </Button>
       </Link>
 
