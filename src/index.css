@@ -91,9 +91,11 @@
 }
 
 @keyframes card-flip {
-  0% { transform: perspective(800px) rotateY(0deg) scale(0.8); opacity: 0.5; }
-  50% { transform: perspective(800px) rotateY(90deg) scale(1.1); }
-  100% { transform: perspective(800px) rotateY(0deg) scale(1); opacity: 1; }
+  0% { transform: scale(0.6) rotateZ(-8deg); opacity: 0; filter: blur(4px); }
+  40% { transform: scale(1.08) rotateZ(2deg); opacity: 1; filter: blur(0); }
+  60% { transform: scale(0.97) rotateZ(-1deg); }
+  80% { transform: scale(1.02) rotateZ(0.5deg); }
+  100% { transform: scale(1) rotateZ(0deg); }
 }
 
 @keyframes card-celebrate {
