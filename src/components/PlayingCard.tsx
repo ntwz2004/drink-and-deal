@@ -16,13 +16,13 @@ const PlayingCard = ({ card, isFlipping, onClick }: Props) => {
       onClick={onClick}
       className={`
         relative w-56 h-80 sm:w-64 sm:h-96 rounded-2xl
-        bg-card-face flex flex-col justify-between p-4
         cursor-pointer transition-transform duration-200
         hover:scale-[1.03] active:scale-[0.97]
         ${isFlipping ? 'animate-card-flip' : ''}
         ${isSpecial ? 'animate-celebrate' : ''}
       `}
       style={{
+        perspective: '800px',
         boxShadow: isSpecial
           ? `
             0 2px 4px rgba(0,0,0,0.1),
@@ -42,26 +42,27 @@ const PlayingCard = ({ card, isFlipping, onClick }: Props) => {
           `,
         background: 'linear-gradient(145deg, #ffffff 0%, #f8f8f8 50%, #f0f0f0 100%)',
         border: '1px solid rgba(0,0,0,0.08)',
+        borderRadius: '1rem',
       }}
     >
       {/* Inner border for realism */}
       <div className="absolute inset-[6px] rounded-xl border border-black/[0.04] pointer-events-none" />
 
-      {/* Top left */}
-      <div className={`flex flex-col items-start leading-none ${colorClass} z-10`}>
+      {/* Top left: rank + suit stacked */}
+      <div className={`absolute top-4 left-4 flex flex-col items-center leading-none ${colorClass} z-10`}>
         <span className="text-2xl sm:text-3xl font-bold">{card.rank}</span>
-        <span className="text-xl sm:text-2xl">{card.suit}</span>
+        <span className="text-xl sm:text-2xl -mt-0.5">{card.suit}</span>
       </div>
 
-      {/* Center */}
-      <div className={`flex items-center justify-center ${colorClass} z-10`}>
+      {/* Center suit */}
+      <div className={`absolute inset-0 flex items-center justify-center ${colorClass} z-10`}>
         <span className="text-6xl sm:text-7xl drop-shadow-sm">{card.suit}</span>
       </div>
 
-      {/* Bottom right */}
-      <div className={`flex flex-col items-end leading-none rotate-180 ${colorClass} z-10`}>
+      {/* Bottom right: rank + suit stacked, rotated 180 */}
+      <div className={`absolute bottom-4 right-4 flex flex-col items-center leading-none rotate-180 ${colorClass} z-10`}>
         <span className="text-2xl sm:text-3xl font-bold">{card.rank}</span>
-        <span className="text-xl sm:text-2xl">{card.suit}</span>
+        <span className="text-xl sm:text-2xl -mt-0.5">{card.suit}</span>
       </div>
 
       {/* Special card particles */}
