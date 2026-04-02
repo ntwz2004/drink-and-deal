@@ -36,16 +36,31 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">
       {/* Header */}
-      <h1 className="text-3xl sm:text-5xl font-black neon-text-pink mb-2 text-center">
+      <h1 className="text-3xl sm:text-5xl font-black neon-text-pink mb-1 text-center">
         🎉 Party Cards 🍻
       </h1>
-      <p className="text-muted-foreground text-sm sm:text-base mb-6">แตะไพ่เพื่อเริ่มเล่น!</p>
+
+      {/* Card counter badge */}
+      <div className="flex items-center gap-2 mb-6">
+        <p className="text-muted-foreground text-sm">
+          {remaining > 0
+            ? `ไพ่ที่เหลือ: ${remaining}/${TOTAL}`
+            : '🎊 หมดไพ่แล้ว!'
+          }
+        </p>
+        <div className="h-1.5 w-24 sm:w-32 bg-muted rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-neon-cyan to-neon-pink rounded-full transition-all duration-500"
+            style={{ width: `${(remaining / TOTAL) * 100}%` }}
+          />
+        </div>
+      </div>
 
       {/* Card Area */}
       <div className="flex-1 flex flex-col items-center justify-center gap-6 w-full max-w-md">
         {drawnCard ? (
           <>
-            <PlayingCard card={drawnCard} isFlipping={isFlipping} />
+            <PlayingCard card={drawnCard} isFlipping={isFlipping} onClick={drawCard} />
             {/* Rule Display */}
             <div
               className={`
@@ -59,24 +74,12 @@ const Index = () => {
                 {rules[drawnCard.rank]}
               </p>
             </div>
+            {remaining === 0 && (
+              <p className="text-neon-yellow text-lg font-bold animate-pulse-neon">แตะไพ่เพื่อจั่วใบสุดท้ายแล้ว!</p>
+            )}
           </>
         ) : (
           <CardDeck remaining={remaining} total={TOTAL} onClick={drawCard} disabled={remaining === 0} />
-        )}
-
-        {/* Draw next if card is showing */}
-        {drawnCard && remaining > 0 && (
-          <Button
-            onClick={drawCard}
-            disabled={isFlipping}
-            className="w-full max-w-xs bg-gradient-to-r from-neon-purple to-neon-pink text-primary-foreground font-bold text-lg py-6 neon-glow-purple hover:opacity-90 transition-opacity"
-          >
-            จั่วไพ่ ({remaining} ใบ)
-          </Button>
-        )}
-
-        {remaining === 0 && (
-          <p className="text-neon-yellow text-xl font-bold animate-pulse-neon">🎊 หมดไพ่แล้ว! 🎊</p>
         )}
       </div>
 
