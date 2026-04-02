@@ -36,6 +36,14 @@ const Index = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">
+      {/* Back nav */}
+      <Link to="/" className="self-start mb-4">
+        <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-foreground">
+          <ArrowLeft className="w-4 h-4" />
+          กลับหน้าหลัก
+        </Button>
+      </Link>
+
       {/* Header */}
       <h1 className="text-3xl sm:text-5xl font-black neon-text-pink mb-1 text-center">
         🎉 Party Cards 🍻
