@@ -22,7 +22,7 @@ const FaceCard = ({ rank, suit }: Props) => {
     <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
       <div
         className={`
-          relative w-[70%] h-[65%] rounded-lg border
+          relative w-[80%] h-[72%] rounded-lg border
           bg-gradient-to-b ${config.bg}
           flex flex-col items-center justify-center
           ${red ? 'border-red-300/40' : 'border-gray-400/40'}
@@ -38,19 +38,19 @@ const FaceCard = ({ rank, suit }: Props) => {
         <div className="absolute inset-1 rounded border border-white/10" />
 
         {/* Character emoji */}
-        <span className="text-5xl sm:text-6xl mb-1 drop-shadow-md">
+        <span className="text-7xl sm:text-8xl mb-1 drop-shadow-md">
           {config.accent}
         </span>
 
         {/* Suit below character */}
-        <span className={`text-2xl sm:text-3xl ${red ? 'text-card-red' : 'text-card-black'}`}>
+        <span className={`text-3xl sm:text-4xl ${red ? 'text-card-red' : 'text-card-black'}`}>
           {suit}
         </span>
 
         {/* Mirrored bottom half overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-[45%] rounded-b-lg overflow-hidden opacity-20">
           <div className="w-full h-full flex items-start justify-center rotate-180 pt-1">
-            <span className="text-4xl sm:text-5xl">
+            <span className="text-6xl sm:text-7xl">
               {config.accent}
             </span>
           </div>
