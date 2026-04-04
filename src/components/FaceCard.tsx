@@ -38,7 +38,7 @@ const FaceCard = ({ rank, suit }: Props) => {
         <div className="absolute inset-1 rounded border border-white/10" />
 
         {/* Character emoji */}
-        <span className="text-5xl sm:text-6xl mb-1 drop-shadow-md">
+        <span className="text-7xl sm:text-8xl mb-1 drop-shadow-md">
           {config.accent}
         </span>
 
