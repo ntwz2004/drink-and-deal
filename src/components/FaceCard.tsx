@@ -50,7 +50,7 @@ const FaceCard = ({ rank, suit }: Props) => {
         {/* Mirrored bottom half overlay */}
         <div className="absolute bottom-0 left-0 right-0 h-[45%] rounded-b-lg overflow-hidden opacity-20">
           <div className="w-full h-full flex items-start justify-center rotate-180 pt-1">
-            <span className="text-4xl sm:text-5xl">
+            <span className="text-6xl sm:text-7xl">
               {config.accent}
             </span>
           </div>
