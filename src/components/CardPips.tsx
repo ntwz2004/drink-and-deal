@@ -104,7 +104,7 @@ const CardPips = ({ rank, suit, colorClass }: Props) => {
             top: `${pos.top}%`,
             left: `${pos.left}%`,
             transform: `translate(-50%, -50%) ${pos.flip ? 'rotate(180deg)' : ''}`,
-            fontSize: isAce ? '5.5rem' : '2.2rem',
+            fontSize: isAce ? '6.5rem' : '2.6rem',
           }}
         >
           {suit}
