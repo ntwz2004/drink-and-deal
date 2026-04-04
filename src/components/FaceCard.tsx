@@ -22,7 +22,7 @@ const FaceCard = ({ rank, suit }: Props) => {
     <div className="absolute inset-0 flex items-center justify-center z-10 pointer-events-none">
       <div
         className={`
-          relative w-[70%] h-[65%] rounded-lg border
+          relative w-[80%] h-[72%] rounded-lg border
           bg-gradient-to-b ${config.bg}
           flex flex-col items-center justify-center
           ${red ? 'border-red-300/40' : 'border-gray-400/40'}
