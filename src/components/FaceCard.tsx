@@ -43,7 +43,7 @@ const FaceCard = ({ rank, suit }: Props) => {
         </span>
 
         {/* Suit below character */}
-        <span className={`text-2xl sm:text-3xl ${red ? 'text-card-red' : 'text-card-black'}`}>
+        <span className={`text-3xl sm:text-4xl ${red ? 'text-card-red' : 'text-card-black'}`}>
           {suit}
         </span>
 
