@@ -1,4 +1,6 @@
 import { isRedSuit, type PlayingCard as CardType, SPECIAL_RANKS } from '@/lib/gameData';
+import CardPips from './CardPips';
+import FaceCard from './FaceCard';
 
 interface Props {
   card: CardType;
@@ -6,9 +8,12 @@ interface Props {
   onClick?: () => void;
 }
 
+const FACE_RANKS = ['J', 'Q', 'K'] as const;
+
 const PlayingCard = ({ card, isFlipping, onClick }: Props) => {
   const red = isRedSuit(card.suit);
   const isSpecial = SPECIAL_RANKS.includes(card.rank);
+  const isFace = (FACE_RANKS as readonly string[]).includes(card.rank);
   const colorClass = red ? 'text-card-red' : 'text-card-black';
 
   return (
@@ -49,20 +54,22 @@ const PlayingCard = ({ card, isFlipping, onClick }: Props) => {
       <div className="absolute inset-[6px] rounded-xl border border-black/[0.04] pointer-events-none" />
 
       {/* Top left: rank + suit stacked */}
-      <div className={`absolute top-4 left-4 flex flex-col items-center leading-none ${colorClass} z-10`}>
-        <span className="text-2xl sm:text-3xl font-bold">{card.rank}</span>
-        <span className="text-xl sm:text-2xl -mt-0.5">{card.suit}</span>
+      <div className={`absolute top-3 left-3 flex flex-col items-center leading-none ${colorClass} z-20`}>
+        <span className="text-lg sm:text-xl font-bold">{card.rank}</span>
+        <span className="text-base sm:text-lg -mt-0.5">{card.suit}</span>
       </div>
 
-      {/* Center suit */}
-      <div className={`absolute inset-0 flex items-center justify-center ${colorClass} z-10`}>
-        <span className="text-6xl sm:text-7xl drop-shadow-sm">{card.suit}</span>
-      </div>
+      {/* Center: pip layout or face card */}
+      {isFace ? (
+        <FaceCard rank={card.rank} suit={card.suit} />
+      ) : (
+        <CardPips rank={card.rank} suit={card.suit} colorClass={colorClass} />
+      )}
 
       {/* Bottom right: rank + suit stacked, rotated 180 */}
-      <div className={`absolute bottom-4 right-4 flex flex-col items-center leading-none rotate-180 ${colorClass} z-10`}>
-        <span className="text-2xl sm:text-3xl font-bold">{card.rank}</span>
-        <span className="text-xl sm:text-2xl -mt-0.5">{card.suit}</span>
+      <div className={`absolute bottom-3 right-3 flex flex-col items-center leading-none rotate-180 ${colorClass} z-20`}>
+        <span className="text-lg sm:text-xl font-bold">{card.rank}</span>
+        <span className="text-base sm:text-lg -mt-0.5">{card.suit}</span>
       </div>
 
       {/* Special card particles */}
