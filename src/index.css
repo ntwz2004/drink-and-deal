@@ -157,6 +157,10 @@
   animation: card-flip 0.6s ease-out;
 }
 
+.animate-card-3d-flip {
+  animation: card-3d-flip 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .animate-celebrate {
   animation: card-celebrate 0.8s ease-in-out 3;
 }
