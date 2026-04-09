@@ -18,10 +18,10 @@ const DOT_POSITIONS: Record<number, [number, number][]> = {
 // Each face maps to a rotation that brings it to front
 const FACE_ROTATIONS: Record<number, string> = {
   1: 'rotateX(0deg) rotateY(0deg)',
-  2: 'rotateY(-90deg)',
-  3: 'rotateX(90deg)',
-  4: 'rotateX(-90deg)',
-  5: 'rotateY(90deg)',
+  2: 'rotateY(90deg)',
+  3: 'rotateX(-90deg)',
+  4: 'rotateX(90deg)',
+  5: 'rotateY(-90deg)',
   6: 'rotateY(180deg)',
 };
 
