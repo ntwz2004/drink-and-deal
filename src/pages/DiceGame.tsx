@@ -24,7 +24,7 @@ const DiceGame = () => {
     setTimeout(() => {
       setResult(final);
       setIsRolling(false);
-    }, 1400);
+    }, 1800);
   }, [isRolling]);
 
   const resetGame = () => {
