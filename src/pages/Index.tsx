@@ -23,7 +23,7 @@ const Index = () => {
     const [card, ...rest] = deck;
     setDrawnCard(card);
     setDeck(rest);
-    setTimeout(() => setIsFlipping(false), 700);
+    setTimeout(() => setIsFlipping(false), 900);
   }, [deck, isFlipping]);
 
   const resetGame = useCallback(() => {
