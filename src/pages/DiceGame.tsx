@@ -76,15 +76,10 @@ const DiceGame = () => {
 
       {/* Result */}
       {result && !isRolling && (
-        <div className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 backdrop-blur-sm border border-border animate-scale-in">
-          <p className="text-3xl font-bold text-foreground mb-1">
-            ได้เลข {result}
-          </p>
-          {winner && (
-            <p className="text-lg text-primary font-semibold">
-              🎯 {winner} โดน!
-            </p>
-          )}
+        <div className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 border border-border animate-scale-in">
+          <p className="text-[11px] tracking-widest uppercase text-muted-foreground mb-1">ผลลัพธ์</p>
+          <p className="text-3xl font-semibold text-foreground mb-1 tabular-nums">{result}</p>
+          {winner && <p className="text-base text-accent font-medium">{winner} โดน!</p>}
         </div>
       )}
 
