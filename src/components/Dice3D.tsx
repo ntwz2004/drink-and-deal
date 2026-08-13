@@ -52,7 +52,7 @@ const DiceFace = ({ dots, transform }: { dots: [number, number][]; transform: st
 );
 
 const Dice3D = ({ face, isRolling, onClick }: Props) => {
-  const size = 180;
+  const size = 120;
   const half = size / 2;
 
   // Track cumulative rotation to avoid jumps
@@ -80,7 +80,7 @@ const Dice3D = ({ face, isRolling, onClick }: Props) => {
       disabled={isRolling}
       className="cursor-pointer outline-none border-none bg-transparent"
       style={{
-        perspective: '900px',
+        perspective: '600px',
         width: size,
         height: size,
       }}
