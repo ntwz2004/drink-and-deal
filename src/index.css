@@ -89,7 +89,16 @@
 }
 
 .animate-card-3d-flip {
-  animation: card-3d-flip 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  animation: card-3d-flip 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+}
+
+@keyframes card-face-reveal {
+  0%, 44% { opacity: 0; }
+  46%, 100% { opacity: 1; }
+}
+
+.animate-card-face-reveal {
+  animation: card-face-reveal 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
 }
 
 .animate-float {
