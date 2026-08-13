@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import PlayingCard from '@/components/PlayingCard';
 import CardDeck from '@/components/CardDeck';
 import RulesModal from '@/components/RulesModal';
-import { createDeck, DEFAULT_RULES, SPECIAL_RANKS, type PlayingCard as CardType, type Rank } from '@/lib/gameData';
-import { RotateCcw, Dices, ArrowLeft } from 'lucide-react';
+import HistoryPanel from '@/components/HistoryPanel';
+import { createDeck, DEFAULT_RULES, type PlayingCard as CardType, type Rank } from '@/lib/gameData';
+import { RotateCcw, ArrowLeft } from 'lucide-react';
 
 const TOTAL = 52;
 
@@ -13,6 +14,7 @@ const Index = () => {
   const [deck, setDeck] = useState<CardType[]>(() => createDeck());
   const [drawnCard, setDrawnCard] = useState<CardType | null>(null);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [history, setHistory] = useState<CardType[]>([]);
   const [rules, setRules] = useState<Record<Rank, string>>({ ...DEFAULT_RULES });
 
   const remaining = deck.length;
@@ -23,68 +25,55 @@ const Index = () => {
     const [card, ...rest] = deck;
     setDrawnCard(card);
     setDeck(rest);
+    setHistory((h) => [...h, card]);
     setTimeout(() => setIsFlipping(false), 900);
   }, [deck, isFlipping]);
 
   const resetGame = useCallback(() => {
     setDeck(createDeck());
     setDrawnCard(null);
+    setHistory([]);
     setIsFlipping(false);
   }, []);
 
-  const isSpecial = drawnCard && SPECIAL_RANKS.includes(drawnCard.rank);
-
   return (
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">
-      {/* Back nav */}
-      <Link to="/" className="self-start mb-4">
+      <Link to="/" className="self-start mb-6">
         <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground hover:text-foreground">
           <ArrowLeft className="w-4 h-4" />
-          กลับหน้าหลัก
+          กลับ
         </Button>
       </Link>
 
-      {/* Header */}
-      <h1 className="text-3xl sm:text-5xl font-black neon-text-pink mb-1 text-center">
-        🎉 Party Cards 🍻
-      </h1>
+      <p className="text-muted-foreground text-xs tracking-[0.3em] uppercase mb-2">Card Game</p>
+      <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-4 text-center">ไพ่ปาร์ตี้</h1>
 
-      {/* Card counter badge */}
-      <div className="flex items-center gap-2 mb-6">
-        <p className="text-muted-foreground text-sm">
-          {remaining > 0
-            ? `ไพ่ที่เหลือ: ${remaining}/${TOTAL}`
-            : '🎊 หมดไพ่แล้ว!'
-          }
+      {/* Counter */}
+      <div className="flex items-center gap-3 mb-8">
+        <p className="text-muted-foreground text-xs tabular-nums">
+          {remaining > 0 ? `เหลือ ${remaining}/${TOTAL}` : 'หมดสำรับแล้ว'}
         </p>
-        <div className="h-1.5 w-24 sm:w-32 bg-muted rounded-full overflow-hidden">
+        <div className="h-px w-24 sm:w-32 bg-border overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-neon-cyan to-neon-pink rounded-full transition-all duration-500"
+            className="h-full bg-foreground/60 transition-all duration-500"
             style={{ width: `${(remaining / TOTAL) * 100}%` }}
           />
         </div>
       </div>
 
-      {/* Card Area */}
-      <div className="flex-1 flex flex-col items-center justify-center gap-6 w-full max-w-md">
+      {/* Card area */}
+      <div className="flex-1 flex flex-col items-center justify-center gap-6 w-full max-w-sm">
         {drawnCard ? (
           <>
             <PlayingCard card={drawnCard} isFlipping={isFlipping} onClick={drawCard} />
-            {/* Rule Display */}
-            <div
-              className={`
-                text-center px-6 py-4 rounded-xl w-full
-                bg-muted/60 backdrop-blur-sm border border-border
-                ${isSpecial ? 'neon-glow-pink border-neon-yellow/50' : ''}
-              `}
-            >
-              <p className="text-sm text-muted-foreground mb-1">กติกา ({drawnCard.rank})</p>
-              <p className={`text-xl sm:text-2xl font-bold ${isSpecial ? 'text-neon-yellow neon-text-cyan' : 'text-foreground'}`}>
-                {rules[drawnCard.rank]}
+            <div className="text-center px-5 py-4 rounded-xl w-full bg-card/50 border border-border animate-fade-up">
+              <p className="text-[11px] tracking-widest uppercase text-muted-foreground mb-1">
+                กติกา · {drawnCard.rank}
               </p>
+              <p className="text-lg sm:text-xl font-medium text-foreground">{rules[drawnCard.rank]}</p>
             </div>
             {remaining === 0 && (
-              <p className="text-neon-yellow text-lg font-bold animate-pulse-neon">แตะไพ่เพื่อจั่วใบสุดท้ายแล้ว!</p>
+              <p className="text-muted-foreground text-xs">จั่วครบทั้งสำรับแล้ว</p>
             )}
           </>
         ) : (
@@ -92,16 +81,13 @@ const Index = () => {
         )}
       </div>
 
-      {/* Bottom Controls */}
-      <div className="flex gap-3 mt-8 mb-4">
-        <Button
-          onClick={resetGame}
-          variant="outline"
-          className="gap-2 border-neon-green/40 hover:border-neon-green hover:bg-neon-green/10 transition-colors"
-        >
-          <RotateCcw className="w-4 h-4" />
-          เริ่มเกมใหม่
+      {/* Controls */}
+      <div className="flex flex-wrap justify-center gap-2 mt-10 mb-4">
+        <Button onClick={resetGame} variant="outline" size="sm" className="gap-2 border-border hover:bg-card">
+          <RotateCcw className="w-3.5 h-3.5" />
+          เริ่มใหม่
         </Button>
+        <HistoryPanel history={history} rules={rules} />
         <RulesModal rules={rules} onSave={setRules} />
       </div>
     </div>

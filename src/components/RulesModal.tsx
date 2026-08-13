@@ -27,28 +27,28 @@ const RulesModal = ({ rules, onSave }: Props) => {
   return (
     <Dialog open={open} onOpenChange={handleOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline" className="gap-2 border-neon-cyan/40 hover:border-neon-cyan hover:bg-neon-cyan/10 transition-colors">
-          <Settings className="w-4 h-4" />
-          ตั้งค่ากติกา
+        <Button variant="outline" size="sm" className="gap-2 border-border hover:bg-card">
+          <Settings className="w-3.5 h-3.5" />
+          กติกา
         </Button>
       </DialogTrigger>
       <DialogContent className="max-h-[80vh] overflow-y-auto bg-popover border-border">
         <DialogHeader>
-          <DialogTitle className="text-xl neon-text-pink">แก้ไขกติกา</DialogTitle>
+          <DialogTitle className="text-lg font-medium text-foreground">แก้ไขกติกา</DialogTitle>
         </DialogHeader>
-        <div className="space-y-3 mt-4">
+        <div className="space-y-2.5 mt-4">
           {RANKS.map((rank) => (
             <div key={rank} className="flex items-center gap-3">
-              <span className="w-10 text-center text-lg font-bold text-neon-yellow shrink-0">{rank}</span>
+              <span className="w-8 text-center text-sm font-medium text-muted-foreground shrink-0">{rank}</span>
               <Input
                 value={draft[rank]}
                 onChange={(e) => setDraft({ ...draft, [rank]: e.target.value })}
-                className="bg-muted border-border focus:border-neon-cyan"
+                className="bg-card/60 border-border focus:border-foreground/30 h-9 text-sm"
               />
             </div>
           ))}
         </div>
-        <Button onClick={handleSave} className="w-full mt-4 bg-neon-pink hover:bg-neon-pink/80 text-primary-foreground font-bold">
+        <Button onClick={handleSave} className="w-full mt-4">
           บันทึก
         </Button>
       </DialogContent>

@@ -2,58 +2,53 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;600;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&display=swap');
 
 @layer base {
   :root {
-    --background: 260 20% 8%;
-    --foreground: 0 0% 95%;
+    /* Warm felt — minimal card-table palette */
+    --background: 158 29% 10%;
+    --foreground: 40 15% 90%;
 
-    --card: 260 15% 14%;
-    --card-foreground: 0 0% 95%;
+    --card: 157 25% 15%;
+    --card-foreground: 40 15% 90%;
 
-    --popover: 260 15% 12%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 157 25% 13%;
+    --popover-foreground: 40 15% 90%;
 
-    --primary: 280 100% 65%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 40 15% 90%;
+    --primary-foreground: 158 29% 10%;
 
-    --secondary: 180 100% 50%;
-    --secondary-foreground: 260 20% 8%;
+    --secondary: 157 20% 20%;
+    --secondary-foreground: 40 15% 90%;
 
-    --muted: 260 15% 18%;
-    --muted-foreground: 260 10% 55%;
+    --muted: 157 20% 19%;
+    --muted-foreground: 150 8% 60%;
 
-    --accent: 330 100% 60%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 6 63% 46%;
+    --accent-foreground: 40 15% 96%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 6 63% 46%;
+    --destructive-foreground: 40 15% 96%;
 
-    --border: 260 15% 22%;
-    --input: 260 15% 22%;
-    --ring: 280 100% 65%;
+    --border: 157 18% 22%;
+    --input: 157 18% 22%;
+    --ring: 150 10% 45%;
 
     --radius: 0.75rem;
 
-    --neon-pink: 330 100% 60%;
-    --neon-cyan: 180 100% 50%;
-    --neon-purple: 280 100% 65%;
-    --neon-yellow: 50 100% 55%;
-    --neon-green: 140 100% 50%;
-
-    --card-red: 0 80% 55%;
+    --card-red: 6 63% 46%;
     --card-black: 0 0% 10%;
     --card-face: 0 0% 100%;
 
-    --sidebar-background: 260 15% 10%;
-    --sidebar-foreground: 0 0% 95%;
-    --sidebar-primary: 280 100% 65%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 260 15% 18%;
-    --sidebar-accent-foreground: 0 0% 95%;
-    --sidebar-border: 260 15% 22%;
-    --sidebar-ring: 280 100% 65%;
+    --sidebar-background: 157 25% 12%;
+    --sidebar-foreground: 40 15% 90%;
+    --sidebar-primary: 40 15% 90%;
+    --sidebar-primary-foreground: 158 29% 10%;
+    --sidebar-accent: 157 20% 19%;
+    --sidebar-accent-foreground: 40 15% 90%;
+    --sidebar-border: 157 18% 22%;
+    --sidebar-ring: 150 10% 45%;
   }
 }
 
@@ -64,129 +59,47 @@
 
   body {
     @apply bg-background text-foreground font-kanit;
-    background-image: 
-      radial-gradient(ellipse at 20% 50%, hsl(280 100% 65% / 0.08) 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 20%, hsl(330 100% 60% / 0.06) 0%, transparent 50%),
-      radial-gradient(ellipse at 50% 80%, hsl(180 100% 50% / 0.05) 0%, transparent 50%);
+    background-image:
+      radial-gradient(ellipse at 50% 0%, hsl(157 25% 18% / 0.7) 0%, transparent 60%);
     min-height: 100vh;
   }
 }
 
-@layer components {
-  .neon-glow-pink {
-    box-shadow: 0 0 10px hsl(var(--neon-pink) / 0.4), 0 0 30px hsl(var(--neon-pink) / 0.2);
-  }
-  .neon-glow-cyan {
-    box-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.4), 0 0 30px hsl(var(--neon-cyan) / 0.2);
-  }
-  .neon-glow-purple {
-    box-shadow: 0 0 10px hsl(var(--neon-purple) / 0.4), 0 0 30px hsl(var(--neon-purple) / 0.2);
-  }
-  .neon-text-pink {
-    text-shadow: 0 0 10px hsl(var(--neon-pink) / 0.6), 0 0 20px hsl(var(--neon-pink) / 0.3);
-  }
-  .neon-text-cyan {
-    text-shadow: 0 0 10px hsl(var(--neon-cyan) / 0.6), 0 0 20px hsl(var(--neon-cyan) / 0.3);
-  }
-}
-
 @keyframes card-3d-flip {
-  0% { transform: rotateY(180deg) scale(0.92); }
-  35% { transform: rotateY(100deg) scale(1.02); }
-  55% { transform: rotateY(40deg) scale(1.06); }
-  70% { transform: rotateY(10deg) scale(1.04); }
-  85% { transform: rotateY(-4deg) scale(1.01); }
-  95% { transform: rotateY(1deg) scale(1); }
+  0% { transform: rotateY(180deg) scale(0.94); }
+  40% { transform: rotateY(90deg) scale(1.03); }
+  70% { transform: rotateY(18deg) scale(1.02); }
+  88% { transform: rotateY(-4deg) scale(1); }
   100% { transform: rotateY(0deg) scale(1); }
-}
-
-@keyframes card-flip {
-  0% { transform: scale(0.6) rotateZ(-8deg); opacity: 0; filter: blur(4px); }
-  40% { transform: scale(1.08) rotateZ(2deg); opacity: 1; filter: blur(0); }
-  60% { transform: scale(0.97) rotateZ(-1deg); }
-  80% { transform: scale(1.02) rotateZ(0.5deg); }
-  100% { transform: scale(1) rotateZ(0deg); }
-}
-
-@keyframes card-celebrate {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  25% { transform: scale(1.05) rotate(-2deg); }
-  50% { transform: scale(1.1) rotate(0deg); }
-  75% { transform: scale(1.05) rotate(2deg); }
-}
-
-@keyframes particle-burst {
-  0% { transform: scale(0); opacity: 1; }
-  100% { transform: scale(3); opacity: 0; }
-}
-
-@keyframes pulse-neon {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
-
-@keyframes dice-shake {
-  0%, 100% { transform: rotate(0deg) scale(1); }
-  10% { transform: rotate(-15deg) scale(1.1); }
-  20% { transform: rotate(12deg) scale(0.95); }
-  30% { transform: rotate(-10deg) scale(1.08); }
-  40% { transform: rotate(8deg) scale(0.97); }
-  50% { transform: rotate(-6deg) scale(1.05); }
-  60% { transform: rotate(5deg) scale(0.98); }
-  70% { transform: rotate(-3deg) scale(1.02); }
-  80% { transform: rotate(2deg) scale(1); }
-  90% { transform: rotate(-1deg) scale(1); }
-}
-
-@keyframes dice-land {
-  0% { transform: scale(1.15); }
-  40% { transform: scale(0.95); }
-  70% { transform: scale(1.03); }
-  100% { transform: scale(1); }
+  50% { transform: translateY(-6px); }
 }
 
 @keyframes scale-in {
-  0% { transform: scale(0.8); opacity: 0; }
+  0% { transform: scale(0.96); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
-.animate-card-flip {
-  animation: card-flip 0.6s ease-out;
+@keyframes fade-up {
+  0% { transform: translateY(6px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
 }
 
 .animate-card-3d-flip {
   animation: card-3d-flip 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-.animate-celebrate {
-  animation: card-celebrate 0.8s ease-in-out 3;
-}
-
-.animate-particle-burst {
-  animation: particle-burst 0.8s ease-out forwards;
-}
-
-.animate-pulse-neon {
-  animation: pulse-neon 2s ease-in-out infinite;
-}
-
 .animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-.animate-dice-shake {
-  animation: dice-shake 1.6s ease-in-out infinite;
-}
-
-.animate-dice-land {
-  animation: dice-land 0.4s ease-out;
+  animation: float 4s ease-in-out infinite;
 }
 
 .animate-scale-in {
   animation: scale-in 0.3s ease-out;
+}
+
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out;
 }

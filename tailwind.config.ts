@@ -17,11 +17,6 @@ export default {
         kanit: ['Kanit', 'sans-serif'],
       },
       colors: {
-        "neon-pink": "hsl(var(--neon-pink))",
-        "neon-cyan": "hsl(var(--neon-cyan))",
-        "neon-purple": "hsl(var(--neon-purple))",
-        "neon-yellow": "hsl(var(--neon-yellow))",
-        "neon-green": "hsl(var(--neon-green))",
         "card-red": "hsl(var(--card-red))",
         "card-black": "hsl(var(--card-black))",
         "card-face": "hsl(var(--card-face))",
