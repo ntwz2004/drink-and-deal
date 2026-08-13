@@ -55,7 +55,11 @@ export function useGameSession<T extends object>(key: StateKey) {
         supabase
           .from('game_sessions')
           .upsert(
-            { device_id: getDeviceId(), [key]: state as unknown as never },
+            {
+              device_id: getDeviceId(),
+              card_state: key === 'card_state' ? (state as never) : undefined,
+              dice_state: key === 'dice_state' ? (state as never) : undefined,
+            },
             { onConflict: 'device_id' },
           )
           .then(() => undefined);
@@ -69,7 +73,11 @@ export function useGameSession<T extends object>(key: StateKey) {
     await supabase
       .from('game_sessions')
       .upsert(
-        { device_id: getDeviceId(), [key]: {} as unknown as never },
+        {
+          device_id: getDeviceId(),
+          card_state: key === 'card_state' ? ({} as never) : undefined,
+          dice_state: key === 'dice_state' ? ({} as never) : undefined,
+        },
         { onConflict: 'device_id' },
       );
   }, [key]);
