@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import PlayingCard from '@/components/PlayingCard';
@@ -7,6 +7,14 @@ import RulesModal from '@/components/RulesModal';
 import HistoryPanel from '@/components/HistoryPanel';
 import { createDeck, DEFAULT_RULES, type PlayingCard as CardType, type Rank } from '@/lib/gameData';
 import { RotateCcw, ArrowLeft } from 'lucide-react';
+import { useGameSession } from '@/hooks/useGameSession';
+
+interface CardState {
+  deck: CardType[];
+  drawnCard: CardType | null;
+  history: CardType[];
+  rules: Record<Rank, string>;
+}
 
 const TOTAL = 52;
 
@@ -16,6 +24,24 @@ const Index = () => {
   const [isFlipping, setIsFlipping] = useState(false);
   const [history, setHistory] = useState<CardType[]>([]);
   const [rules, setRules] = useState<Record<Rank, string>>({ ...DEFAULT_RULES });
+
+  const { loaded, initial, save, clear } = useGameSession<CardState>('card_state');
+
+  // Restore saved state
+  useEffect(() => {
+    if (loaded && initial?.deck) {
+      setDeck(initial.deck);
+      setDrawnCard(initial.drawnCard ?? null);
+      setHistory(initial.history ?? []);
+      setRules({ ...DEFAULT_RULES, ...(initial.rules ?? {}) });
+    }
+  }, [loaded, initial]);
+
+  // Persist state (only cleared by "เริ่มใหม่")
+  useEffect(() => {
+    if (!loaded) return;
+    save({ deck, drawnCard, history, rules });
+  }, [loaded, deck, drawnCard, history, rules, save]);
 
   const remaining = deck.length;
 
@@ -34,7 +60,9 @@ const Index = () => {
     setDrawnCard(null);
     setHistory([]);
     setIsFlipping(false);
-  }, []);
+    setRules({ ...DEFAULT_RULES });
+    clear();
+  }, [clear]);
 
   return (
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">

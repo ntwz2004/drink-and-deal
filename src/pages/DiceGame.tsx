@@ -1,17 +1,50 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Link } from 'react-router-dom';
 import { RotateCcw, ArrowLeft } from 'lucide-react';
 import Dice3D from '@/components/Dice3D';
+import { useGameSession } from '@/hooks/useGameSession';
+
+interface DiceState {
+  players: Record<number, string>;
+  result: number | null;
+  displayFace: number;
+}
+
+const EMPTY_PLAYERS: Record<number, string> = { 1: '', 2: '', 3: '', 4: '', 5: '', 6: '' };
 
 const DiceGame = () => {
-  const [players, setPlayers] = useState<Record<number, string>>({
-    1: '', 2: '', 3: '', 4: '', 5: '', 6: '',
-  });
+  const [players, setPlayers] = useState<Record<number, string>>({ ...EMPTY_PLAYERS });
   const [result, setResult] = useState<number | null>(null);
   const [isRolling, setIsRolling] = useState(false);
   const [displayFace, setDisplayFace] = useState(1);
+  const [diceSize, setDiceSize] = useState(180);
+
+  const { loaded, initial, save, clear } = useGameSession<DiceState>('dice_state');
+
+  // Restore saved state
+  useEffect(() => {
+    if (loaded && initial) {
+      setPlayers({ ...EMPTY_PLAYERS, ...(initial.players ?? {}) });
+      setResult(initial.result ?? null);
+      setDisplayFace(initial.displayFace ?? 1);
+    }
+  }, [loaded, initial]);
+
+  // Persist state (only cleared by "เริ่มใหม่")
+  useEffect(() => {
+    if (!loaded || isRolling) return;
+    save({ players, result, displayFace });
+  }, [loaded, isRolling, players, result, displayFace, save]);
+
+  // Responsive dice size
+  useEffect(() => {
+    const update = () => setDiceSize(window.innerWidth < 380 ? 140 : window.innerWidth < 640 ? 165 : 190);
+    update();
+    window.addEventListener('resize', update);
+    return () => window.removeEventListener('resize', update);
+  }, []);
 
   const roll = useCallback(() => {
     if (isRolling) return;
@@ -31,6 +64,8 @@ const DiceGame = () => {
     setResult(null);
     setIsRolling(false);
     setDisplayFace(1);
+    setPlayers({ ...EMPTY_PLAYERS });
+    clear();
   };
 
   const winner = result ? players[result]?.trim() : null;
@@ -68,7 +103,7 @@ const DiceGame = () => {
 
       {/* 3D Dice */}
       <div className="flex flex-col items-center gap-4">
-        <Dice3D face={displayFace} isRolling={isRolling} onClick={roll} />
+        <Dice3D face={displayFace} isRolling={isRolling} onClick={roll} size={diceSize} />
         <p className="text-muted-foreground text-xs">
           {isRolling ? 'กำลังทอย...' : 'แตะลูกเต๋าเพื่อทอย'}
         </p>
