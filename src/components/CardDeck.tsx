@@ -12,23 +12,24 @@ const CardDeck = ({ remaining, total, onClick, disabled }: Props) => {
       disabled={disabled}
       className={`
         relative w-56 h-80 sm:w-64 sm:h-96 rounded-xl
-        bg-gradient-to-br from-neon-purple via-primary to-neon-pink
-        flex flex-col items-center justify-center gap-3
+        bg-secondary border border-border overflow-hidden
         transition-all duration-300 cursor-pointer
-        neon-glow-purple
-        ${disabled ? 'opacity-40 cursor-not-allowed' : 'hover:scale-105 active:scale-95 animate-float'}
+        ${disabled ? 'opacity-40 cursor-not-allowed' : 'hover:border-foreground/25 active:scale-[0.98] animate-float'}
       `}
+      style={{ boxShadow: '0 16px 32px rgba(0,0,0,0.3)' }}
     >
-      {/* Card back pattern */}
-      <div className="absolute inset-2 rounded-lg border-2 border-foreground/20 flex items-center justify-center">
-        <div className="absolute inset-2 rounded-md border border-foreground/10" />
-        <div className="text-center z-10">
-          <div className="text-5xl sm:text-6xl mb-2">🃏</div>
-          <p className="text-foreground text-lg sm:text-xl font-bold">แตะเพื่อจั่ว</p>
-          <p className="text-foreground/70 text-sm mt-1">
-            ไพ่ที่เหลือ: {remaining}/{total}
-          </p>
-        </div>
+      <div
+        className="absolute inset-0 opacity-25"
+        style={{
+          backgroundImage: `repeating-linear-gradient(45deg, transparent 0 7px, hsl(var(--foreground) / 0.35) 7px 8px)`,
+        }}
+      />
+      <div className="absolute inset-3 rounded-lg border border-foreground/20" />
+      <div className="relative z-10 h-full flex flex-col items-center justify-center gap-1">
+        <p className="text-foreground text-base font-medium">แตะเพื่อจั่ว</p>
+        <p className="text-muted-foreground text-xs tabular-nums">
+          {remaining}/{total}
+        </p>
       </div>
     </button>
   );
