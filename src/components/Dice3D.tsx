@@ -4,6 +4,7 @@ interface Props {
   face: number;
   isRolling: boolean;
   onClick: () => void;
+  size?: number;
 }
 
 const DOT_POSITIONS: Record<number, [number, number][]> = {
@@ -51,8 +52,7 @@ const DiceFace = ({ dots, transform }: { dots: [number, number][]; transform: st
   </div>
 );
 
-const Dice3D = ({ face, isRolling, onClick }: Props) => {
-  const size = 120;
+const Dice3D = ({ face, isRolling, onClick, size = 180 }: Props) => {
   const half = size / 2;
 
   // Track cumulative rotation to avoid jumps
@@ -78,9 +78,9 @@ const Dice3D = ({ face, isRolling, onClick }: Props) => {
     <button
       onClick={onClick}
       disabled={isRolling}
-      className="cursor-pointer outline-none border-none bg-transparent"
+      className="cursor-pointer outline-none border-none bg-transparent p-0"
       style={{
-        perspective: '600px',
+        perspective: `${size * 5}px`,
         width: size,
         height: size,
       }}
