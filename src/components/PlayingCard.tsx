@@ -23,36 +23,49 @@ const PlayingCard = ({ card, isFlipping, onClick }: Props) => {
     >
       <div
         className={`relative w-full h-full rounded-xl ${isFlipping ? 'animate-card-3d-flip' : ''}`}
-        style={{ transformStyle: 'preserve-3d' }}
+        style={{
+          transformStyle: 'preserve-3d',
+          WebkitTransformStyle: 'preserve-3d',
+        } as React.CSSProperties}
       >
         {/* === FRONT === */}
         <div
-          className="absolute inset-0 rounded-xl bg-white"
+          className="absolute inset-0 rounded-xl bg-white overflow-hidden"
           style={{
             backfaceVisibility: 'hidden',
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'translateZ(1px)',
             border: '1px solid rgba(0,0,0,0.14)',
             boxShadow: '0 1px 2px rgba(0,0,0,0.18), 0 16px 32px rgba(0,0,0,0.32)',
-          }}
+          } as React.CSSProperties}
         >
-          {/* Corner index — top left */}
-          <div className={`absolute top-2.5 left-3 flex flex-col items-center leading-none ${colorClass} z-20`}>
-            <span className="text-xl font-semibold">{card.rank}</span>
-            <span className="text-base -mt-0.5">{card.suit}</span>
-          </div>
-
-          {/* Center */}
-          {isFace ? (
-            <FaceCard rank={card.rank} suit={card.suit} />
-          ) : (
-            <CardPips rank={card.rank} suit={card.suit} colorClass={colorClass} />
-          )}
-
-          {/* Corner index — bottom right */}
           <div
-            className={`absolute bottom-2.5 right-3 flex flex-col items-center leading-none rotate-180 ${colorClass} z-20`}
+            className={`absolute inset-0 ${isFlipping ? 'animate-card-face-reveal' : ''}`}
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+            } as React.CSSProperties}
           >
-            <span className="text-xl font-semibold">{card.rank}</span>
-            <span className="text-base -mt-0.5">{card.suit}</span>
+            {/* Corner index — top left */}
+            <div className={`absolute top-2.5 left-3 flex flex-col items-center leading-none ${colorClass} z-20`}>
+              <span className="text-xl font-semibold">{card.rank}</span>
+              <span className="text-base -mt-0.5">{card.suit}</span>
+            </div>
+
+            {/* Center */}
+            {isFace ? (
+              <FaceCard rank={card.rank} suit={card.suit} />
+            ) : (
+              <CardPips rank={card.rank} suit={card.suit} colorClass={colorClass} />
+            )}
+
+            {/* Corner index — bottom right */}
+            <div
+              className={`absolute bottom-2.5 right-3 flex flex-col items-center leading-none rotate-180 ${colorClass} z-20`}
+            >
+              <span className="text-xl font-semibold">{card.rank}</span>
+              <span className="text-base -mt-0.5">{card.suit}</span>
+            </div>
           </div>
         </div>
 
@@ -61,10 +74,11 @@ const PlayingCard = ({ card, isFlipping, onClick }: Props) => {
           className="absolute inset-0 rounded-xl overflow-hidden bg-secondary"
           style={{
             backfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)',
+            WebkitBackfaceVisibility: 'hidden',
+            transform: 'rotateY(180deg) translateZ(1px)',
             border: '1px solid hsl(var(--border))',
             boxShadow: '0 16px 32px rgba(0,0,0,0.32)',
-          }}
+          } as React.CSSProperties}
         >
           <div
             className="absolute inset-0 opacity-25"
