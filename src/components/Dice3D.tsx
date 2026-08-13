@@ -56,8 +56,12 @@ const Dice3D = ({ face, isRolling, onClick, size = 180 }: Props) => {
   const half = size / 2;
 
   // Track cumulative rotation to avoid jumps
-  const [rotation, setRotation] = useState({ x: 0, y: 0 });
+  const [rotation, setRotation] = useState(() => {
+    const [x, y] = FACE_ANGLES[face] ?? [0, 0];
+    return { x, y };
+  });
   const prevRolling = useRef(false);
+  const prevFace = useRef(face);
 
   useEffect(() => {
     if (isRolling && !prevRolling.current) {
@@ -71,7 +75,13 @@ const Dice3D = ({ face, isRolling, onClick, size = 180 }: Props) => {
         y: targetY + spinsY * (Math.random() > 0.5 ? 1 : -1),
       });
     }
+    // Face changed without rolling (e.g. restored saved state): snap to it
+    if (!isRolling && !prevRolling.current && face !== prevFace.current) {
+      const [x, y] = FACE_ANGLES[face] ?? [0, 0];
+      setRotation({ x, y });
+    }
     prevRolling.current = isRolling;
+    prevFace.current = face;
   }, [isRolling, face]);
 
   return (
