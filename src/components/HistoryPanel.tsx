@@ -30,6 +30,9 @@ const HistoryPanel = ({ history, rules }: Props) => {
       <SheetContent side="right" className="w-[85vw] sm:max-w-sm bg-background border-border overflow-y-auto">
         <SheetHeader>
           <SheetTitle className="text-foreground">ประวัติการจั่วไพ่</SheetTitle>
+          <SheetDescription className="text-muted-foreground text-xs">
+            ไพ่ที่จั่วไปแล้ว เรียงจากใบล่าสุด
+          </SheetDescription>
         </SheetHeader>
 
         {history.length === 0 ? (
