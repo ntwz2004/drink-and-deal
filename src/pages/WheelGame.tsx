@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, RotateCcw, Plus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useGameSession } from '@/hooks/useGameSession';
+
 
 interface WheelState {
   names: string[];
