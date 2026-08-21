@@ -93,7 +93,9 @@ const WheelGame = () => {
 
 
   const seg = names.length ? 360 / names.length : 360;
-  const chance = names.length ? (100 / names.length).toFixed(names.length === 3 || names.length > 4 ? 1 : 0) : '0';
+  const chanceValue = names.length ? 100 / names.length : 0;
+  const chance = Number.isInteger(chanceValue) ? String(chanceValue) : chanceValue.toFixed(1);
+
 
 
   return (
