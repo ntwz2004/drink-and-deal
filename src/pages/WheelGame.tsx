@@ -205,16 +205,36 @@ const WheelGame = () => {
       >
         {spinning ? 'กำลังหมุน...' : 'หมุนวงล้อ'}
       </Button>
-      {names.length < 2 && (
+      {names.length < 2 ? (
         <p className="text-muted-foreground text-xs mt-3">ต้องมีอย่างน้อย 2 ชื่อ</p>
+      ) : (
+        <p className="text-muted-foreground text-xs mt-3">แตะที่วงล้อเพื่อหมุนก็ได้</p>
       )}
 
       {result && !spinning && (
-        <div className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 border border-border animate-scale-in">
+        <button
+          onClick={() => setPopupOpen(true)}
+          className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 border border-border animate-scale-in"
+        >
           <p className="text-[11px] tracking-widest uppercase text-muted-foreground mb-1">ผลลัพธ์</p>
           <p className="text-2xl font-semibold text-accent">{result} โดน!</p>
-        </div>
+        </button>
       )}
+
+      <Dialog open={popupOpen} onOpenChange={setPopupOpen}>
+        <DialogContent className="max-w-xs text-center border-border bg-card">
+          <DialogTitle className="text-[11px] tracking-widest uppercase text-muted-foreground font-normal">
+            ผลลัพธ์
+          </DialogTitle>
+          <DialogDescription className="sr-only">คนที่วงล้อสุ่มได้</DialogDescription>
+          <p className="text-4xl font-semibold text-accent break-words">{result}</p>
+          <p className="text-foreground text-sm">โดนแล้ว! 🍻</p>
+          <Button onClick={() => setPopupOpen(false)} className="mt-2">
+            ตกลง
+          </Button>
+        </DialogContent>
+      </Dialog>
+
 
       <div className="mt-8">
         <Button onClick={reset} variant="outline" size="sm" className="gap-2 border-border hover:bg-card">
