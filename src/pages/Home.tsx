@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Spade, Dices } from 'lucide-react';
+import { Spade, Dices, Disc3 } from 'lucide-react';
 
 const games = [
   {
@@ -13,6 +13,12 @@ const games = [
     description: 'ใส่ชื่อผู้เล่น 1-6 แล้วทอยดูว่าใครโดน',
     Icon: Dices,
     path: '/dice',
+  },
+  {
+    title: 'วงล้อสุ่มชื่อ',
+    description: 'เพิ่มชื่อผู้เล่นแล้วหมุนวงล้อหาคนโดน',
+    Icon: Disc3,
+    path: '/wheel',
   },
 ];
 
