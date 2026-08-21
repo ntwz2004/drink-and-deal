@@ -196,6 +196,17 @@ const WheelGame = () => {
                   >
                     {n.length > 12 ? `${n.slice(0, 12)}…` : n}
                   </text>
+                  <text
+                    x="100"
+                    y="55"
+                    fill={light ? 'hsl(158 29% 10% / 0.65)' : 'hsl(40 15% 94% / 0.65)'}
+                    fontSize="5"
+                    dominantBaseline="middle"
+                    transform={`rotate(${start + seg / 2} 100 100)`}
+                    textAnchor="middle"
+                  >
+                    {chance}%
+                  </text>
                 </g>
               );
             })
