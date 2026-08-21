@@ -22,6 +22,7 @@ export type Database = {
           dice_state: Json
           id: string
           updated_at: string
+          wheel_state: Json
         }
         Insert: {
           card_state?: Json
@@ -30,6 +31,7 @@ export type Database = {
           dice_state?: Json
           id?: string
           updated_at?: string
+          wheel_state?: Json
         }
         Update: {
           card_state?: Json
@@ -38,6 +40,7 @@ export type Database = {
           dice_state?: Json
           id?: string
           updated_at?: string
+          wheel_state?: Json
         }
         Relationships: []
       }

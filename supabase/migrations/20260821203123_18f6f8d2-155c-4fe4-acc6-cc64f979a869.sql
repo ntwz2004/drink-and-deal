@@ -1,0 +1,1 @@
+ALTER TABLE public.game_sessions ADD COLUMN IF NOT EXISTS wheel_state jsonb NOT NULL DEFAULT '{}'::jsonb;
