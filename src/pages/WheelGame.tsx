@@ -33,7 +33,9 @@ const WheelGame = () => {
   const [angle, setAngle] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [popupOpen, setPopupOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
 
   const { loaded, initial, save, clear } = useGameSession<WheelState>('wheel_state');
 
