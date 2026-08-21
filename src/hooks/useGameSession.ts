@@ -12,7 +12,7 @@ export function getDeviceId(): string {
   return id;
 }
 
-type StateKey = 'card_state' | 'dice_state';
+type StateKey = 'card_state' | 'dice_state' | 'wheel_state';
 
 /**
  * Persists a game state object to Lovable Cloud, keyed by a random device id.
