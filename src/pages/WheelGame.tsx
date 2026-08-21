@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom';
 import { ArrowLeft, RotateCcw, Plus, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { useGameSession } from '@/hooks/useGameSession';
+
 
 interface WheelState {
   names: string[];
@@ -31,7 +33,9 @@ const WheelGame = () => {
   const [angle, setAngle] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const [result, setResult] = useState<string | null>(null);
+  const [popupOpen, setPopupOpen] = useState(false);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
 
   const { loaded, initial, save, clear } = useGameSession<WheelState>('wheel_state');
 
@@ -72,6 +76,7 @@ const WheelGame = () => {
     timer.current = setTimeout(() => {
       setResult(names[winner]);
       setSpinning(false);
+      setPopupOpen(true);
     }, 4200);
   }, [spinning, names, angle]);
 
@@ -81,9 +86,11 @@ const WheelGame = () => {
     setDraft('');
     setAngle(0);
     setResult(null);
+    setPopupOpen(false);
     setSpinning(false);
     clear();
   };
+
 
   const seg = names.length ? 360 / names.length : 360;
 
@@ -131,7 +138,16 @@ const WheelGame = () => {
       )}
 
       {/* Wheel */}
-      <div className="relative w-[min(90vw,340px)] aspect-square mb-6">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={spin}
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && spin()}
+        aria-label="หมุนวงล้อ"
+        className={`relative w-[min(90vw,340px)] aspect-square mb-6 select-none outline-none ${
+          spinning || names.length < 2 ? 'cursor-default' : 'cursor-pointer active:scale-[0.98] transition-transform'
+        }`}
+      >
         <div className="absolute left-1/2 -translate-x-1/2 -top-1 z-10">
           <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-t-[18px] border-l-transparent border-r-transparent border-t-accent" />
         </div>
@@ -189,16 +205,36 @@ const WheelGame = () => {
       >
         {spinning ? 'กำลังหมุน...' : 'หมุนวงล้อ'}
       </Button>
-      {names.length < 2 && (
+      {names.length < 2 ? (
         <p className="text-muted-foreground text-xs mt-3">ต้องมีอย่างน้อย 2 ชื่อ</p>
+      ) : (
+        <p className="text-muted-foreground text-xs mt-3">แตะที่วงล้อเพื่อหมุนก็ได้</p>
       )}
 
       {result && !spinning && (
-        <div className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 border border-border animate-scale-in">
+        <button
+          onClick={() => setPopupOpen(true)}
+          className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 border border-border animate-scale-in"
+        >
           <p className="text-[11px] tracking-widest uppercase text-muted-foreground mb-1">ผลลัพธ์</p>
           <p className="text-2xl font-semibold text-accent">{result} โดน!</p>
-        </div>
+        </button>
       )}
+
+      <Dialog open={popupOpen} onOpenChange={setPopupOpen}>
+        <DialogContent className="max-w-xs text-center border-border bg-card">
+          <DialogTitle className="text-[11px] tracking-widest uppercase text-muted-foreground font-normal">
+            ผลลัพธ์
+          </DialogTitle>
+          <DialogDescription className="sr-only">คนที่วงล้อสุ่มได้</DialogDescription>
+          <p className="text-4xl font-semibold text-accent break-words">{result}</p>
+          <p className="text-foreground text-sm">โดนแล้ว! 🍻</p>
+          <Button onClick={() => setPopupOpen(false)} className="mt-2">
+            ตกลง
+          </Button>
+        </DialogContent>
+      </Dialog>
+
 
       <div className="mt-8">
         <Button onClick={reset} variant="outline" size="sm" className="gap-2 border-border hover:bg-card">
