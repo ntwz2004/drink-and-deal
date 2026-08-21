@@ -93,6 +93,8 @@ const WheelGame = () => {
 
 
   const seg = names.length ? 360 / names.length : 360;
+  const chance = names.length ? (100 / names.length).toFixed(names.length === 3 || names.length > 4 ? 1 : 0) : '0';
+
 
   return (
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">
