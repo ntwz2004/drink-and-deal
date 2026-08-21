@@ -169,7 +169,7 @@ const WheelGame = () => {
                     fontSize="8"
                     fontWeight="500"
                     dominantBaseline="middle"
-                    transform={`rotate(${start + seg / 2} 100 100) rotate(90 100 45)`}
+                    transform={`rotate(${start + seg / 2} 100 100)`}
                     textAnchor="middle"
                   >
                     {n.length > 12 ? `${n.slice(0, 12)}…` : n}
