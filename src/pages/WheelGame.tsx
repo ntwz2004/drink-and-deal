@@ -76,6 +76,7 @@ const WheelGame = () => {
     timer.current = setTimeout(() => {
       setResult(names[winner]);
       setSpinning(false);
+      setPopupOpen(true);
     }, 4200);
   }, [spinning, names, angle]);
 
@@ -85,9 +86,11 @@ const WheelGame = () => {
     setDraft('');
     setAngle(0);
     setResult(null);
+    setPopupOpen(false);
     setSpinning(false);
     clear();
   };
+
 
   const seg = names.length ? 360 / names.length : 360;
 
