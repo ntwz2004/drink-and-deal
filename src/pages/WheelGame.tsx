@@ -93,6 +93,10 @@ const WheelGame = () => {
 
 
   const seg = names.length ? 360 / names.length : 360;
+  const chanceValue = names.length ? 100 / names.length : 0;
+  const chance = Number.isInteger(chanceValue) ? String(chanceValue) : chanceValue.toFixed(1);
+
+
 
   return (
     <div className="min-h-screen flex flex-col items-center px-4 py-6 sm:py-10">
@@ -129,6 +133,7 @@ const WheelGame = () => {
               className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/50 pl-3 pr-2 py-1 text-xs text-foreground"
             >
               {n}
+              <span className="text-[10px] text-muted-foreground tabular-nums">{chance}%</span>
               <button onClick={() => removeName(i)} className="text-muted-foreground hover:text-accent">
                 <X className="w-3 h-3" />
               </button>
@@ -136,6 +141,7 @@ const WheelGame = () => {
           ))}
         </div>
       )}
+
 
       {/* Wheel */}
       <div
@@ -189,6 +195,17 @@ const WheelGame = () => {
                     textAnchor="middle"
                   >
                     {n.length > 12 ? `${n.slice(0, 12)}…` : n}
+                  </text>
+                  <text
+                    x="100"
+                    y="55"
+                    fill={light ? 'hsl(158 29% 10% / 0.65)' : 'hsl(40 15% 94% / 0.65)'}
+                    fontSize="5"
+                    dominantBaseline="middle"
+                    transform={`rotate(${start + seg / 2} 100 100)`}
+                    textAnchor="middle"
+                  >
+                    {chance}%
                   </text>
                 </g>
               );
