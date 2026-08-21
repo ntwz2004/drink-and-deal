@@ -129,6 +129,7 @@ const WheelGame = () => {
               className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card/50 pl-3 pr-2 py-1 text-xs text-foreground"
             >
               {n}
+              <span className="text-[10px] text-muted-foreground tabular-nums">{chance}%</span>
               <button onClick={() => removeName(i)} className="text-muted-foreground hover:text-accent">
                 <X className="w-3 h-3" />
               </button>
@@ -136,6 +137,7 @@ const WheelGame = () => {
           ))}
         </div>
       )}
+
 
       {/* Wheel */}
       <div
