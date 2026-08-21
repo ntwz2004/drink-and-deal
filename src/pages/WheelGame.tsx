@@ -164,12 +164,12 @@ const WheelGame = () => {
                   />
                   <text
                     x="100"
-                    y="100"
+                    y="45"
                     fill={light ? 'hsl(158 29% 10%)' : 'hsl(40 15% 94%)'}
                     fontSize="8"
                     fontWeight="500"
                     dominantBaseline="middle"
-                    transform={`rotate(${start + seg / 2} 100 100) translate(0 -60) rotate(90 100 100)`}
+                    transform={`rotate(${start + seg / 2} 100 100) rotate(90 100 45)`}
                     textAnchor="middle"
                   >
                     {n.length > 12 ? `${n.slice(0, 12)}…` : n}
