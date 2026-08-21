@@ -55,11 +55,7 @@ export function useGameSession<T extends object>(key: StateKey) {
         supabase
           .from('game_sessions')
           .upsert(
-            {
-              device_id: getDeviceId(),
-              card_state: key === 'card_state' ? (state as never) : undefined,
-              dice_state: key === 'dice_state' ? (state as never) : undefined,
-            },
+            { device_id: getDeviceId(), [key]: state } as never,
             { onConflict: 'device_id' },
           )
           .then(() => undefined);
@@ -72,14 +68,7 @@ export function useGameSession<T extends object>(key: StateKey) {
     if (timer.current) clearTimeout(timer.current);
     await supabase
       .from('game_sessions')
-      .upsert(
-        {
-          device_id: getDeviceId(),
-          card_state: key === 'card_state' ? ({} as never) : undefined,
-          dice_state: key === 'dice_state' ? ({} as never) : undefined,
-        },
-        { onConflict: 'device_id' },
-      );
+      .upsert({ device_id: getDeviceId(), [key]: {} } as never, { onConflict: 'device_id' });
   }, [key]);
 
   return { loaded, initial, save, clear };
