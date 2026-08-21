@@ -138,7 +138,16 @@ const WheelGame = () => {
       )}
 
       {/* Wheel */}
-      <div className="relative w-[min(90vw,340px)] aspect-square mb-6">
+      <div
+        role="button"
+        tabIndex={0}
+        onClick={spin}
+        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && spin()}
+        aria-label="หมุนวงล้อ"
+        className={`relative w-[min(90vw,340px)] aspect-square mb-6 select-none outline-none ${
+          spinning || names.length < 2 ? 'cursor-default' : 'cursor-pointer active:scale-[0.98] transition-transform'
+        }`}
+      >
         <div className="absolute left-1/2 -translate-x-1/2 -top-1 z-10">
           <div className="w-0 h-0 border-l-[10px] border-r-[10px] border-t-[18px] border-l-transparent border-r-transparent border-t-accent" />
         </div>
