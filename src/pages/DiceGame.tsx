@@ -22,6 +22,8 @@ const DiceGame = () => {
   const [isRolling, setIsRolling] = useState(false);
   const [displayFace, setDisplayFace] = useState(1);
   const [diceSize, setDiceSize] = useState(180);
+  const [popupOpen, setPopupOpen] = useState(false);
+
 
   const { loaded, initial, save, clear } = useGameSession<DiceState>('dice_state');
 
