@@ -100,14 +100,17 @@ const DiceGame = () => {
       {/* Player inputs */}
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 w-full max-w-sm mb-10">
         {[1, 2, 3, 4, 5, 6].map((num) => (
-          <div key={num} className="flex items-center gap-2">
-            <span className="text-sm font-mono text-muted-foreground w-5 text-right">{num}</span>
-            <Input
-              placeholder={`ผู้เล่น ${num}`}
-              value={players[num]}
-              onChange={(e) => setPlayers({ ...players, [num]: e.target.value })}
-              className="bg-card/50 border-border focus:border-foreground/30 text-sm h-9 rounded-lg"
-            />
+          <div key={num} className="flex flex-col gap-0.5">
+            <div className="flex items-center gap-2">
+              <span className="text-sm font-mono text-muted-foreground w-5 text-right">{num}</span>
+              <Input
+                placeholder={`ผู้เล่น ${num}`}
+                value={players[num]}
+                onChange={(e) => setPlayers({ ...players, [num]: e.target.value })}
+                className="bg-card/50 border-border focus:border-foreground/30 text-sm h-9 rounded-lg"
+              />
+            </div>
+            <p className="text-[10px] text-muted-foreground/60 pl-7">16.7%</p>
           </div>
         ))}
       </div>
