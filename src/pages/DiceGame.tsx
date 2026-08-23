@@ -74,8 +74,10 @@ const DiceGame = () => {
     setIsRolling(false);
     setDisplayFace(1);
     setPlayers({ ...EMPTY_PLAYERS });
+    setPopupOpen(false);
     clear();
   };
+
 
   const winner = result ? players[result]?.trim() : null;
 
