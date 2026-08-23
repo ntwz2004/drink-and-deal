@@ -54,6 +54,7 @@ const DiceGame = () => {
     if (isRolling) return;
     setIsRolling(true);
     setResult(null);
+    setPopupOpen(false);
 
     const final = Math.floor(Math.random() * 6) + 1;
     setDisplayFace(final);
@@ -61,8 +62,12 @@ const DiceGame = () => {
     setTimeout(() => {
       setResult(final);
       setIsRolling(false);
+      if (players[final]?.trim()) {
+        setPopupOpen(true);
+      }
     }, 1800);
-  }, [isRolling]);
+  }, [isRolling, players]);
+
 
   const resetGame = () => {
     setResult(null);
