@@ -1,10 +1,12 @@
 import { useState, useCallback, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Dialog, DialogContent, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Link } from 'react-router-dom';
 import { RotateCcw, ArrowLeft } from 'lucide-react';
 import Dice3D from '@/components/Dice3D';
 import { useGameSession } from '@/hooks/useGameSession';
+
 
 interface DiceState {
   players: Record<number, string>;
