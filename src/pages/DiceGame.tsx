@@ -122,12 +122,30 @@ const DiceGame = () => {
 
       {/* Result */}
       {result && !isRolling && (
-        <div className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 border border-border animate-scale-in">
+        <button
+          onClick={() => setPopupOpen(true)}
+          className="mt-8 text-center px-6 py-5 rounded-xl w-full max-w-sm bg-card/50 border border-border animate-scale-in"
+        >
           <p className="text-[11px] tracking-widest uppercase text-muted-foreground mb-1">ผลลัพธ์</p>
           <p className="text-3xl font-semibold text-foreground mb-1 tabular-nums">{result}</p>
           {winner && <p className="text-base text-accent font-medium">{winner} โดน!</p>}
-        </div>
+        </button>
       )}
+
+      <Dialog open={popupOpen} onOpenChange={setPopupOpen}>
+        <DialogContent className="max-w-xs text-center border-border bg-card">
+          <DialogTitle className="text-[11px] tracking-widest uppercase text-muted-foreground font-normal">
+            ผลลัพธ์
+          </DialogTitle>
+          <DialogDescription className="sr-only">คนที่ลูกเต๋าออก</DialogDescription>
+          <p className="text-4xl font-semibold text-accent break-words">{winner}</p>
+          <p className="text-foreground text-sm">โดนแล้ว! 🍻</p>
+          <Button onClick={() => setPopupOpen(false)} className="mt-2">
+            ตกลง
+          </Button>
+        </DialogContent>
+      </Dialog>
+
 
       {/* Controls */}
       <div className="mt-8">
